@@ -91,21 +91,21 @@ def cadastrar(arq):
         if nome_contato == '':
             nome_contato = 'Desconhecido'
             break
-        elif not (nome_contato.isalpha()):
+        elif not (nome_contato.isalpha() or nome_contato.__contains__(' ')):
             print('Digite um nome válido!')
             continue
         else:
             break
     while True:
         email = str(input('E-mail do contato: ')).strip()
-        if not (email.isascii() or email.__contains__(' ')):
+        if not email.isascii() or email.__contains__(' '):
             print('Digite um E-mail válido!')
             continue
         else:
             break
     while True:
         telefone = str(input('Telefone do contato: ')).strip()
-        if not (telefone.isalnum() or telefone.__contains__(' ')):
+        if not telefone.isalnum() or telefone.__contains__(' '):
             print('Digite um Telefone válido e não utilize espaços!')
             continue
         else:
@@ -124,7 +124,7 @@ def buscarcontato(arq: str):
     """
     while True:
         nome = str(input('Digite o nome a ser buscado: '))
-        if not (nome.isalpha()):
+        if not (nome.isalpha() or nome.__contains__(' ')):
             print('Digite um nome válido!')
             continue
         else:
@@ -139,14 +139,14 @@ def buscarcontato(arq: str):
             info['Telefone'].append(line[2])
     if len(info['Nome']) > 0:
         print(f'{nome} foi localidado na lista de contatos.')
-        print('-=' * 40)
-        print(f'{"NOME":<25}', end='')
-        print(f'{"E - MAIL":<37}', end='')
-        print(f'{"TELEFONE":>10}')
-        print('*' * 80)
+        print('-=' * 50)
+        print(f'{"NOME":<35}', end='')
+        print(f'{"E - MAIL":<40}', end='')
+        print(f'{"TELEFONE"}')
+        print('*' * 100)
         for i, v in enumerate(info['Nome']):
-            print(f"{info['Nome'][i]}{info['Email'][i]:^50}{info['Telefone'][i]:^25}")
-        print('*' * 80, end='\n')
+            print(f"{info['Nome'][i]:<30}{info['Email'][i]:<45}{info['Telefone'][i]:}")
+        print('*' * 100, end='\n')
     else:
         print(f'{nome} não foi localizado na lista de contatos.', '\n')
 
