@@ -180,16 +180,16 @@ def listar(arq: str):
     :param arq: O nome do arquivo contendo os dados dos contatos
     """
     a = open(arq, 'r', encoding='utf-8')
-    if a:
-        print('-=' * 40)
+    if len(list(a)) > 0:
+        print('-=' * 50)
         print(f'{"NOMES":<20}', end='')
         print(f'{"E - MAILS":<30}', end='')
         print(f'{"TELEFONES":>20}')
-        print('-=' * 40)
+        print('-=' * 50)
         for line in a:
             line = line.replace('\n', '')
             dado = line.split(';')
             print(f'{dado[0]:<20}{dado[1]:<41}{dado[2]}')
-        print('-=' * 40)
+        print('-=' * 50)
     else:
-        print('Não há contatos cadastrados!')
+        print('Não há contatos cadastrados!\n')

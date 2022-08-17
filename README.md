@@ -3,5 +3,5 @@
  
  ## Funcionalidades
  * Adicionar um contato;
- * Exibir os contatos já cadastrados:
+ * Exibir os contatos já cadastrados;
  * Fazer a busca de um contato na lista de contatos.
