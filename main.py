@@ -5,5 +5,3 @@ if not checararquivo(arq):
 menu('Agenda de Contatos')
 while True:
     opcao = opcoes(arq)
-    if opcao == 0:
-        break

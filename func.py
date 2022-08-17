@@ -33,6 +33,9 @@ def opcoes(arq):
             print('Digite uma opção válida!')
             print('-=' * 50, end='\n')
             continue
+        except (KeyboardInterrupt, EOFError):
+            print('O usuário cancelou a operação. Saindo do programa...')
+            exit()
     return functions(opcao, arq)
 
 
@@ -52,7 +55,7 @@ def functions(opcao, arq):
         buscarcontato(arq)
     else:
         print('Saindo do programa!')
-        return 0
+        exit()
 
 
 def checararquivo(arq: str):
@@ -87,29 +90,44 @@ def cadastrar(arq):
     """
     a = open(arq, 'at', encoding='utf-8')
     while True:
-        nome_contato = str(input('Nome do contato: ')).strip().capitalize()
-        if nome_contato == '':
-            nome_contato = 'Desconhecido'
-            break
-        elif not (nome_contato.isalpha() or nome_contato.__contains__(' ')):
-            print('Digite um nome válido!')
-            continue
+        try:
+            nome_contato = str(input('Nome do contato: ')).strip().capitalize()
+        except (KeyboardInterrupt, EOFError):
+            print('O usuário cancelou a operação. Saindo do programa...')
+            exit()
         else:
-            break
+            if nome_contato == '':
+                nome_contato = 'Desconhecido'
+                break
+            elif not (nome_contato.isalpha() or nome_contato.__contains__(' ')):
+                print('Digite um nome válido!')
+                continue
+            else:
+                break
     while True:
-        email = str(input('E-mail do contato: ')).strip()
-        if not email.isascii() or email.__contains__(' '):
-            print('Digite um E-mail válido!')
-            continue
+        try:
+            email = str(input('E-mail do contato: ')).strip()
+        except (KeyboardInterrupt, EOFError):
+            print('O usuário cancelou a operação. Saindo do programa...')
+            exit()
         else:
-            break
+            if not email.isascii() or email.__contains__(' '):
+                print('Digite um E-mail válido!')
+                continue
+            else:
+                break
     while True:
-        telefone = str(input('Telefone do contato: ')).strip()
-        if not telefone.isalnum() or telefone.__contains__(' '):
-            print('Digite um Telefone válido e não utilize espaços!')
-            continue
+        try:
+            telefone = str(input('Telefone do contato: ')).strip()
+        except (KeyboardInterrupt, EOFError):
+            print('O usuário cancelou a operação. Saindo do programa...')
+            exit()
         else:
-            break
+            if not telefone.isalnum() or telefone.__contains__(' '):
+                print('Digite um Telefone válido e não utilize espaços!')
+                continue
+            else:
+                break
     a.write(f'{nome_contato};{email};{telefone}\n')
     a.close()
     print('Contato cadastrado com sucesso!', '\n')
@@ -123,12 +141,17 @@ def buscarcontato(arq: str):
     :return:
     """
     while True:
-        nome = str(input('Digite o nome a ser buscado: '))
-        if not (nome.isalpha() or nome.__contains__(' ')):
-            print('Digite um nome válido!')
-            continue
+        try:
+            nome = str(input('Digite o nome a ser buscado: '))
+        except (KeyboardInterrupt, EOFError):
+            print('O usuário cancelou a operação. Saindo do programa...')
+            exit()
         else:
-            break
+            if not (nome.isalpha() or nome.__contains__(' ')):
+                print('Digite um nome válido!')
+                continue
+            else:
+                break
     a = open(arq, 'r')
     info = {'Nome': [], 'Email': [], 'Telefone': []}
     for i in a:
